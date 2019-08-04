@@ -1,6 +1,5 @@
+// @TODO: Complete the following function that builds the metadata panel
 function buildMetadata(sample) {
-
-  // @TODO: Complete the following function that builds the metadata panel
   var url = `/samples/${sample}`;
 
   // Use `d3.json` to fetch the metadata for a sample
@@ -22,7 +21,7 @@ function buildMetadata(sample) {
 
     var valuePair = Object.entries(dataValues[1]);
     console.log(valuePair)
-    metaData.selectAll('p').data(valuePair).enter().append('p')
+    metaData.selectAll("p").data(valuePair).enter().append("p")
       .text(function (d) {
         console.log(d[0])
         return `${d[0]}:${d[1]}`
@@ -44,7 +43,7 @@ function buildCharts(sample) {
     var bubbleTrace = {
       x: otuIds,
       y: sampleValues,
-      mode: 'markers',
+      mode: "markers",
       marker: {
         size: sampleValues,
         color: otuIds
@@ -62,7 +61,7 @@ function buildCharts(sample) {
     var pieTrace = {
       labels: otuIds.slice(0, 10),
       values: sampleValues.slice(0, 10),
-      type: 'pie'
+      type: "pie"
     };
 
     var pieData = [pieTrace];
