@@ -4,40 +4,44 @@ function buildMetadata(sample) {
 
   // Use `d3.json` to fetch the metadata for a sample
   d3.json(url).then(function (data) {
-    var dataPanel = [data];
+    console.log("url");
+    console.log(url);
+    console.log("first sample");
+    console.log(sample);
 
     // Use d3 to select the panel with id of `#sample-metadata`
     var metaData = d3.select("#sample-metadata");
 
     // Use `.html("") to clear any existing metadata
     metaData.html("");
+    console.log("meta sample");
+    console.log(metaData);
 
     // Use `Object.entries` to add each key and value pair to the panel
 
-    dataValues = []
-    Object.entries(dataPanel).forEach(([key, value]) => {
-      dataValues.push(key, value);
-    });
+    Object.entries(sample).forEach(function ([key, value]) {
+      var dataValues = metaData.append("p");
+      dataValues.text(`${key}: ${value}`);
+      console.log("dataValues");
+      console.log(dataValues);
+      console.log("key, value");
+      console.log(key, value);
+    })
+  });
 
-    var valuePair = Object.entries(dataValues[1]);
-    console.log(valuePair)
-    metaData.selectAll("p").data(valuePair).enter().append("p")
-      .text(function (d) {
-        console.log(d[0])
-        return `${d[0]}:${d[1]}`
-      })
 
-  })
-}
+};
 
 function buildCharts(sample) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var selectMetadata = `/samples/${sample}`;
   d3.json(selectMetadata).then(function (response) {
-    var response = [response];
-    var otuIds = response[0].otu_ids;
-    var otuLabels = response[0].otu_labels;
-    var sampleValues = response[0].sample_values;
+    console.log(response)
+
+    var otuIds = response.otu_ids;
+    var sampleValues = response.sample_values;
+    var otuLabels = response.otu_labels;
 
     // @TODO: Build a Bubble Chart using the sample data
     var bubbleTrace = {
