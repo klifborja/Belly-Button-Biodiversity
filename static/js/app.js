@@ -55,9 +55,18 @@ function buildCharts(sample) {
     };
 
     var bubbleData = [bubbleTrace];
+    var bubbleLayout = {
+      xaxis: {
+        title: "<b>Operational Taxonomic Units</b>"
+      },
+      yaxis: {
+        title: "<b>Sample Frequency</b>",
+        autorange: true
+      }
+    };
 
 
-    Plotly.newPlot("bubble", bubbleData);
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
     // @TODO: Build a Pie Chart
     // Use slice() to grab the top 10 sample_values, otu_ids, and labels (10 each).
@@ -71,10 +80,10 @@ function buildCharts(sample) {
     var pieData = [pieTrace];
 
     var pieLayout = {
-      title: "Pie Chart",
+      title: "Belly Button Biodiversity",
     };
 
-    Plotly.newPlot("pie", pieData, pieLayout, { showSendToCloud: true });
+    Plotly.newPlot("pie", pieData, pieLayout);
   });
 }
 
